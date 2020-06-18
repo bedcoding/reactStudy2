@@ -1,49 +1,22 @@
 import React, { Component } from 'react';
 
+// 보여줄 컴포넌트를 import
 import Counter from './components/Count';
 import Option from './components/Option';
 import Button from './components/Button';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      my_value: 0,
-      diff: 1
-    };
-    
-    this.onChange = this.onChange.bind(this);
-    this.onIncrement = this.onIncrement.bind(this);
-    this.onDecrement = this.onDecrement.bind(this);
-  }
-
-  onChange(diff) {  // Option에서 실행되는 이벤트 핸들러 (사용자의 입력 값을 state.diff에 저장)
-    this.setState({
-      diff: diff
-    });
-  }
-
-  onIncrement() {  // Button에서 실행되는 이벤트 핸들러 (본래 값 + 사용자가 입력한 값)
-    this.setState(prevState => ({
-      my_value: prevState.my_value + Number(this.state.diff)
-    }));
-  }
-
-  onDecrement() {  // Button에서 실행되는 이벤트 핸들러 (본래 값 - 사용자가 입력한 값)
-    this.setState(prevState => ({
-      my_value: prevState.my_value - Number(this.state.diff)
-    }));
-  }
-
   render() {
+
+    // 각각의 컴포넌트는 모두 store를 사용하기 때문에 store를 전달해 줍니다.
+    // 참고: 아래 부분이 react-redux를 사용하지 않을 때 생기는 불편함입니다.
+    // store를 사용하는 모든 child에게 store을 계속해서 전달해 주어야 합니다. 
+    // (컴포넌트 갯수가 여러개가 된다면 번거로운 작업이 됨)
     return (
       <div>
-        <Counter my_value={this.state.my_value} />  {/* 사용자가 버튼을 누르면 나오는 최종 결과값 표시 */}
-        <Option diff={this.state.diff} onChange={this.onChange} />  {/* 사용자가 입력창에 입력한 값 */}
-        <Button onIncrement={this.onIncrement} onDecrement={this.onDecrement} />
-    {/* <button onClick={this.onIncrement}> + </button>
-        <button onClick={this.onDecrement}> - </button> */}
+        <Counter store={this.props.store} />
+        <Option store={this.props.store} />
+        <Button store={this.props.store} />
       </div>
     );
   }

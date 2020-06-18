@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-class Counter extends Component {
 
-    // 부모로부터 전달받은 value 출력
+class Counter extends Component {
     render() {
         return (
-            <div> 
-                <h1> Value : {this.props.my_value} </h1> 
+            // 참고: counter의 state 구조는 다음과 같다.
+            // { counter: { value: 0, diff: 1 } }
+            
+            <div>
+                <h1>Value : {this.props.store.getState().counter.value}</h1>
             </div>
         );
     }
 }
 
-export default Counter
+export default Counter;
