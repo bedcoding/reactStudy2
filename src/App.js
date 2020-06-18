@@ -12,6 +12,7 @@ class App extends Component {
       value: 0,
       diff: 1
     };
+    
     this.onChange = this.onChange.bind(this);
     this.onIncrement = this.onIncrement.bind(this);
     this.onDecrement = this.onDecrement.bind(this);
