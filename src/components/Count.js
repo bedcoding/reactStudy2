@@ -5,7 +5,7 @@ class Counter extends Component {
     render() {
         return (
             <div> 
-                <h1> Value : {this.props.value} </h1> 
+                <h1> Value : {this.props.my_value} </h1> 
             </div>
         );
     }

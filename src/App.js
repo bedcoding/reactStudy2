@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      value: 0,
+      my_value: 0,
       diff: 1
     };
     
@@ -24,24 +24,26 @@ class App extends Component {
     });
   }
 
-  onIncrement() {  // Button에서 실행되는 이벤트 핸들러 ()
+  onIncrement() {  // Button에서 실행되는 이벤트 핸들러 (본래 값 + 사용자가 입력한 값)
     this.setState(prevState => ({
-      value: prevState.value + Number(this.state.diff)
+      my_value: prevState.my_value + Number(this.state.diff)
     }));
   }
 
-  onDecrement() {
+  onDecrement() {  // Button에서 실행되는 이벤트 핸들러 (본래 값 - 사용자가 입력한 값)
     this.setState(prevState => ({
-      value: prevState.value - Number(this.state.diff)
+      my_value: prevState.my_value - Number(this.state.diff)
     }));
   }
 
   render() {
     return (
       <div>
-        <Counter value={this.state.value} />
-        <Option diff={this.state.diff} onChange={this.onChange} />
+        <Counter my_value={this.state.my_value} />  {/* 사용자가 버튼을 누르면 나오는 최종 결과값 표시 */}
+        <Option diff={this.state.diff} onChange={this.onChange} />  {/* 사용자가 입력창에 입력한 값 */}
         <Button onIncrement={this.onIncrement} onDecrement={this.onDecrement} />
+    {/* <button onClick={this.onIncrement}> + </button>
+        <button onClick={this.onDecrement}> - </button> */}
       </div>
     );
   }

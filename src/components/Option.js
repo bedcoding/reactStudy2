@@ -11,9 +11,13 @@ class Option extends Component {
             <div>
                 <input
                     value={this.props.diff}
-                    onChange={(event)=>{this.props.onChange(event.target.value)}}
+                    onChange={(event) => {
+                        this.props.onChange(event.target.value)
+                    }}
                 />
             </div>
         );
     }
-} export default Option;
+} 
+
+export default Option;
