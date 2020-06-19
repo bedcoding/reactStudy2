@@ -1,5 +1,7 @@
 #### Redux 기본 원리
-백성(React 컴포넌트)들은 임금님(Store)에게 직접 접근할 수 없고 궁궐 문지기(Reducer)에게 신문고를 두들기는 식으로 특별한 행동(Action)을 하여 자신의 뜻을 전달해야 합니다.
+백성(React 컴포넌트)들은 금님(Store)에게 직접 접근할 수 없고, 편지를 쓰든가 신문고를 두들기는 식으로 특별한 행동(Action)을 하여 궁궐 문지기(Reducer)에게 자신의 뜻을 전달(dispatch)해야 합니다. 
+
+- 백성(React Component) -> 신문고 두들김(Action) -> 자신의 뜻을 전달(dispatch) -> 문지기(Reducer) -> 임금(Store)
 
 <br>
 
@@ -218,7 +220,38 @@ p.s.
 <br><br>
 
 ##### 2. mapDispatchToProps
-Reducer(임금님)에 action(저 백성이 세금 깎아달라고 요청합니다)을 알리는 함수 dispatch(궁궐 문지기)를 어떻게 props에 엮을지 정합니다.
+Reducer(궁궐 문지기)에 action(세금 깎아달라는 백성의 편지)을 전달하는 함수 dispatch(전달)를 어떻게 props에 엮을지 정합니다.
+
+Action Creator에서 action(편지)을 만든다고 해도, 그것으론 아무 일도 일어나지 않습니다. 
+백성(React Component)들이 문지기(Reducer)을 향해 통지하려고 만든 action(편지)을 dispatch(전달)라는 함수에 넘겨줘야만 합니다.
+
+이렇게 하면 모든 Reducer가 실행됩니다.
+Reducer에 switch문으로 분기를 나눈 것은 바로 이 때문입니다.
+Reducer는 관계없는 action을 무시하고, 자기에게 주어진 action만을 처리하도록 되어있어야만 합니다.
 
 
-(작성중)
+<br>
+##### 3. bindActionCreators
+위에서는 이렇게 썼었습니다.
+
+    export default connect(
+        state => ({ value: state.value }),
+        dispatch => ({ dispatchAddValue: amount => dispatch(addValue(amount)) })
+    )(Counter)
+
+mapDispatchToProps를 이용해서 아래와 같이 작성하는 것도 가능하다네요.
+( import { bindActionCreators } from 'redux'도 추가해줘야 함 )
+
+    export default connect(
+        state => ({ value: state.value }),
+        { addValue }
+    )(Counter)
+
+현재는 bindActionCreators의 실행도 생략할 수 있게끔 되었습니다 (import도 할 필요 없음)
+
+    export default connect(
+        state => ({ value: state.value }),
+        { addValue }
+    )(Counter)
+
+<br>

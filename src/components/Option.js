@@ -13,7 +13,7 @@ class Option extends Component {
     // 2. dispatch는 reducer로 action을 전달
     // 3. reducer는 store에 state를 저장
     onChange(event) {
-        this.props.store.dispatch(setDiff(parseInt(event.target.value)));
+        this.props.onUpdateDiff(parseInt(event.target.value));
     }
 
     render() {
